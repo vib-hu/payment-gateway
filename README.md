@@ -1,17 +1,17 @@
 # Payment Gateway Api
 ## High Level Overview of Architecture
-- Domain Driven Design followed
-- AES encryption used for encrypting sensitive data in DB
-- Circuit Breaker and Retry used with configurable settings
-- Generic http and tcp clients modules created for reusability
-- Generic json and soap modules formatters created for reusability
-- DB migrations are used for creating tables in container
+- Domain Driven Design followed 
+- AES encryption used for encrypting the sensitive data in database (Encryption at rest)
+- Circuit Breaker and Retry used with configurable settings per endpoint
+- Generic http and tcp clients created for reusability
+- Generic json and soap formatters created for reusability
+- Database migrations with Postgres container used 
 - Wiremock used for mocking Gateway A and B
-- Slog used with excluding sensitive details from the logging
-- Swagger added for endpoint documentation
+- Slog used for logging with excluding sensitive details
+- Swagger added for endpoints documentation
 - Makefile added for simplifying the build steps
-- Docker compose added 
-- ISO standard country and currency codes are used for making api aligned with the global standard
+- Docker compose used for running Wiremock, Database and Api containers 
+- ISO standard country and currency codes are used for making api aligned with the global standards
 
 ## Steps to run the project
 **Step 1:** Make sure docker installed in your machine  <br />
