@@ -20,7 +20,7 @@
 **Step 2:** Clone the project  <br />
 **Step 3:** run> cd PaymentGateway <br />
 **Step 4:** run> sudo make start-components <br />
-**Output:**
+**Output:**  <br />
 <img width="361" alt="image" src="https://github.com/user-attachments/assets/8b31a36e-bfcb-46e4-97e0-dfd3f55b04ac">
 
 #### For stopping the containers
