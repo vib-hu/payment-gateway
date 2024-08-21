@@ -1,6 +1,7 @@
 # Payment Gateway Api
 ## High Level Overview of Architecture
 <img width="1048" alt="image" src="https://github.com/user-attachments/assets/a3dbb554-0a91-4cb0-86d5-9869c9d3cbec">
+
 - Domain Driven Design followed 
 - AES encryption used for encrypting the sensitive data in database (Encryption at rest)
 - Circuit Breaker and Retry used with configurable settings per endpoint
