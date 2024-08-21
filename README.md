@@ -1,6 +1,6 @@
 # Payment Gateway Api
 ## High Level Overview of Architecture
-<img width="1048" alt="image" src="https://github.com/user-attachments/assets/0de2b176-4e55-4710-b50f-ec495a323c9e">
+<img width="1043" alt="image" src="https://github.com/user-attachments/assets/8c17b8c4-bfa2-4a78-82a1-6553834a65d7">
 
 - Domain Driven Design followed 
 - AES encryption used for encrypting the sensitive data in database (Encryption at rest)
