@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/v1/gateway-a/deposit"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "is_successful": true,
+      "response_code": "10000",
+      "response_description": "deposited"
+    }
+  }
+}
+

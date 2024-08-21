@@ -1,0 +1,6 @@
+{
+  "Server": {
+    "HttpServerShutdownTimeout": 20,
+    "Port": "80"
+  }
+}

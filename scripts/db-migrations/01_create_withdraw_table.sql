@@ -1,0 +1,22 @@
+CREATE TABLE public.withdraw (
+id uuid NOT NULL,
+customer_id int8 NOT NULL,
+amount numeric(9,3),
+currency int2 NOT NULL,
+country int2 NOT NULL,
+payment_method int2 NOT NULL,
+card_number varchar,
+cvv varchar(200),
+apple_pay_token varchar,
+google_pay_token varchar,
+status int2 NOT NULL,
+gateway_identifier varchar(50),
+psp_response_code varchar(100),
+psp_response_description varchar,
+description varchar,
+client_reference_id varchar(100),
+billing_address varchar,
+created_date_utc timestamp NULL DEFAULT timezone('utc', now()),
+modified_date_utc timestamp NULL DEFAULT timezone('utc', now()),
+CONSTRAINT pk_withdraw_id PRIMARY KEY (id)
+);

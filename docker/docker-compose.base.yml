@@ -1,0 +1,35 @@
+services:
+  postgres:
+    container_name: postgres_container
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 1l1w008uy5uk3io
+      PGDATA: /data/postgres
+      POSTGRES_DB: payments
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5434:5432"
+    volumes:
+      - ../scripts/db-migrations/:/docker-entrypoint-initdb.d/
+    restart: unless-stopped
+  redis:
+    container_name: redis
+    image: redis:6.2.6-alpine
+    ports:
+      - '6379:6379'
+    healthcheck:
+      test: ["CMD", "redis-cli", "--raw", "incr", "ping"]
+  mock_payment_gateways:
+    container_name: mock_payment_gateways
+    image: 'wiremock/wiremock:3.9.1'
+    ports:
+      - '8443:8443'
+    volumes:
+      - ../wiremock/mappings:/home/wiremock/mappings
+    entrypoint: ["/docker-entrypoint.sh", "--global-response-templating", "--disable-gzip", "--verbose"]
+

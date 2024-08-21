@@ -1,0 +1,22 @@
+CREATE TABLE public.deposits (
+id uuid NOT NULL,
+customer_id int8 NOT NULL,
+amount numeric(9,3),
+currency int2 NOT NULL,
+country int2 NOT NULL,
+route_type int2 NOT NULL,
+card_number varchar(200),
+cvv varchar(100),
+account_number varchar(200),
+routing_number varchar(100),
+account_holder_name varchar,
+status int2 NOT NULL,
+gateway_identifier varchar(50),
+psp_response_code varchar(100),
+psp_response_description varchar,
+description varchar,
+client_reference_id varchar(100),
+created_date_utc timestamp NULL DEFAULT timezone('utc', now()),
+modified_date_utc timestamp NULL DEFAULT timezone('utc', now()),
+CONSTRAINT pk_deposits_id PRIMARY KEY (id)
+);

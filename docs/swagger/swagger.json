@@ -1,0 +1,249 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "description": "This is a Payment Gateway API supporting Gateway A and B",
+        "title": "Payment Gateway API",
+        "contact": {
+            "name": "Vibhu Mishra",
+            "url": "https://www.linkedin.com/in/vibhu-mishra-07532236/",
+            "email": "vibhumishra808@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0"
+    },
+    "host": "localhost:8080",
+    "paths": {
+        "/health": {
+            "get": {
+                "description": "health endpoint",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "example"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "ok",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/v1/payments/deposit": {
+            "post": {
+                "description": "Creates a new deposit request and processes it.",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Deposit"
+                ],
+                "summary": "Create a new deposit to bank or card",
+                "parameters": [
+                    {
+                        "description": "Deposit request payload",
+                        "name": "deposit",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/gin.H"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.AmountRequest": {
+            "type": "object",
+            "properties": {
+                "currency": {
+                    "$ref": "#/definitions/enums.Currency"
+                },
+                "value": {
+                    "type": "number"
+                }
+            }
+        },
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.BankDetailsRequest": {
+            "type": "object",
+            "properties": {
+                "account_holder_name": {
+                    "type": "string"
+                },
+                "account_number": {
+                    "type": "string"
+                },
+                "routing_number": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CardDetailsRequest": {
+            "type": "object",
+            "properties": {
+                "card_number": {
+                    "type": "string"
+                },
+                "cvv": {
+                    "type": "string"
+                }
+            }
+        },
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CustomerRequest": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.ErrorResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                },
+                "type": {
+                    "$ref": "#/definitions/enums.ErrorType"
+                }
+            }
+        },
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositRequest": {
+            "type": "object",
+            "properties": {
+                "amount": {
+                    "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.AmountRequest"
+                },
+                "bank_details": {
+                    "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.BankDetailsRequest"
+                },
+                "card_details": {
+                    "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CardDetailsRequest"
+                },
+                "client_reference_id": {
+                    "type": "string"
+                },
+                "country": {
+                    "$ref": "#/definitions/enums.Country"
+                },
+                "customer": {
+                    "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CustomerRequest"
+                },
+                "transaction_route_type": {
+                    "$ref": "#/definitions/enums.TransactionRouteType"
+                }
+            }
+        },
+        "PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositResponse": {
+            "type": "object",
+            "properties": {
+                "errorResponse": {
+                    "$ref": "#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.ErrorResponse"
+                },
+                "isSuccessful": {
+                    "type": "boolean"
+                },
+                "transactionId": {
+                    "type": "string"
+                }
+            }
+        },
+        "enums.Country": {
+            "type": "integer",
+            "enum": [
+                840,
+                124,
+                826,
+                276,
+                356
+            ],
+            "x-enum-varnames": [
+                "CountryUSA",
+                "CountryCanada",
+                "CountryUK",
+                "CountryGermany",
+                "CountryIndia"
+            ]
+        },
+        "enums.Currency": {
+            "type": "integer",
+            "enum": [
+                840,
+                124,
+                826,
+                276,
+                356
+            ],
+            "x-enum-varnames": [
+                "CurrencyUSA",
+                "CurrencyCanada",
+                "CurrencyUK",
+                "CurrencyGermany",
+                "CurrencyIndia"
+            ]
+        },
+        "enums.ErrorType": {
+            "type": "integer",
+            "enum": [
+                1,
+                2,
+                3,
+                4
+            ],
+            "x-enum-varnames": [
+                "ValidationError",
+                "IntegrationError",
+                "InternalServerError",
+                "PaymentError"
+            ]
+        },
+        "enums.TransactionRouteType": {
+            "type": "integer",
+            "enum": [
+                1,
+                2
+            ],
+            "x-enum-varnames": [
+                "RouteToBank",
+                "RouteToCard"
+            ]
+        },
+        "gin.H": {
+            "type": "object",
+            "additionalProperties": {}
+        }
+    }
+}

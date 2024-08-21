@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/v1/gateway-b/withdraw"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/soap+xml"
+    },
+    "body": "<soap:Envelope xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\"><soap:Body><WithdrawResponse><is_successful>true</is_successful><response_code>10000</response_code><response_description>authorized</response_description></WithdrawResponse></soap:Body></soap:Envelope>"
+  }
+}

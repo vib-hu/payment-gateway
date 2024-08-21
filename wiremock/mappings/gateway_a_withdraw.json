@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/api/v1/gateway-a/withdraw"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "is_successful": true,
+      "response_code": "10000",
+      "response_description": "authorized"
+    }
+  }
+}
+

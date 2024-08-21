@@ -1,0 +1,171 @@
+definitions:
+  PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.AmountRequest:
+    properties:
+      currency:
+        $ref: '#/definitions/enums.Currency'
+      value:
+        type: number
+    type: object
+  PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.BankDetailsRequest:
+    properties:
+      account_holder_name:
+        type: string
+      account_number:
+        type: string
+      routing_number:
+        type: string
+    type: object
+  PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CardDetailsRequest:
+    properties:
+      card_number:
+        type: string
+      cvv:
+        type: string
+    type: object
+  PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CustomerRequest:
+    properties:
+      id:
+        type: integer
+    type: object
+  PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.ErrorResponse:
+    properties:
+      message:
+        type: string
+      type:
+        $ref: '#/definitions/enums.ErrorType'
+    type: object
+  PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositRequest:
+    properties:
+      amount:
+        $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.AmountRequest'
+      bank_details:
+        $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.BankDetailsRequest'
+      card_details:
+        $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CardDetailsRequest'
+      client_reference_id:
+        type: string
+      country:
+        $ref: '#/definitions/enums.Country'
+      customer:
+        $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.CustomerRequest'
+      transaction_route_type:
+        $ref: '#/definitions/enums.TransactionRouteType'
+    type: object
+  PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositResponse:
+    properties:
+      errorResponse:
+        $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_common-dtos.ErrorResponse'
+      isSuccessful:
+        type: boolean
+      transactionId:
+        type: string
+    type: object
+  enums.Country:
+    enum:
+    - 840
+    - 124
+    - 826
+    - 276
+    - 356
+    type: integer
+    x-enum-varnames:
+    - CountryUSA
+    - CountryCanada
+    - CountryUK
+    - CountryGermany
+    - CountryIndia
+  enums.Currency:
+    enum:
+    - 840
+    - 124
+    - 826
+    - 276
+    - 356
+    type: integer
+    x-enum-varnames:
+    - CurrencyUSA
+    - CurrencyCanada
+    - CurrencyUK
+    - CurrencyGermany
+    - CurrencyIndia
+  enums.ErrorType:
+    enum:
+    - 1
+    - 2
+    - 3
+    - 4
+    type: integer
+    x-enum-varnames:
+    - ValidationError
+    - IntegrationError
+    - InternalServerError
+    - PaymentError
+  enums.TransactionRouteType:
+    enum:
+    - 1
+    - 2
+    type: integer
+    x-enum-varnames:
+    - RouteToBank
+    - RouteToCard
+  gin.H:
+    additionalProperties: {}
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: vibhumishra808@gmail.com
+    name: Vibhu Mishra
+    url: https://www.linkedin.com/in/vibhu-mishra-07532236/
+  description: This is a Payment Gateway API supporting Gateway A and B
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  title: Payment Gateway API
+  version: "1.0"
+paths:
+  /health:
+    get:
+      consumes:
+      - application/json
+      description: health endpoint
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+      tags:
+      - example
+  /v1/payments/deposit:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new deposit request and processes it.
+      parameters:
+      - description: Deposit request payload
+        in: body
+        name: deposit
+        required: true
+        schema:
+          $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/PaymentGateway_internal_payment-gateway-api_controllers_models_deposit-dtos.DepositResponse'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/gin.H'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/gin.H'
+      summary: Create a new deposit to bank or card
+      tags:
+      - Deposit
+swagger: "2.0"
